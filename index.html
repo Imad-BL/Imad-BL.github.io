@@ -1,18 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOULOUIZ IMAD | Digital Business Card</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>BOULOUIZ IMAD| Digital Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a;
+            --primary: #6366f1;
             --secondary: #3b82f6;
             --accent: #f59e0b;
             --white: #ffffff;
-            --bg: #020617;
-            --card-bg: #0f172a;
+            --bg: #030712;
+            --glass: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -21,148 +23,212 @@
             box-sizing: border-box;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: var(--bg);
+            background: linear-gradient(-45deg, #030712, #1e1b4b, #1e293b, #030712);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: var(--white);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         .card {
-            background: var(--card-bg);
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             width: 100%;
-            max-width: 400px;
-            border-radius: 24px;
-            padding: 40px 30px;
+            max-width: 420px;
+            border-radius: 40px;
+            padding: 60px 40px;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--glass-border);
             position: relative;
-            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+            transition: transform 0.3s ease;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            z-index: 0;
+        .card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .logo-top {
+            width: 110px;
+            margin: 0 auto 35px;
+            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.4));
+            display: block;
+        }
+
+        .profile-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 30px;
         }
 
         .profile-img {
-            width: 120px;
-            height: 120px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--secondary), var(--accent));
-            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            font-weight: 700;
-            border: 4px solid var(--card-bg);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            position: relative;
-            z-index: 1;
+            font-size: 4rem;
+            font-weight: 800;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            animation: pulse 4s infinite;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            position: relative;
-            z-index: 1;
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
 
         .title {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--secondary);
-            margin-bottom: 25px;
-            font-weight: 500;
+            margin-bottom: 30px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
+            letter-spacing: 3px;
         }
 
         .bio {
-            font-size: 0.95rem;
-            color: #94a3b8;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            position: relative;
-            z-index: 1;
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-weight: 300;
         }
 
         .links {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            position: relative;
-            z-index: 1;
+            gap: 20px;
         }
 
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--white);
             text-decoration: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 24px;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
         }
 
         .link-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.03) translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.3);
         }
 
         .link-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            color: var(--secondary);
+            transition: transform 0.3s ease;
         }
 
-        .footer {
-            margin-top: 40px;
-            font-size: 0.8rem;
-            color: #475569;
-            position: relative;
-            z-index: 1;
+        .link-btn:hover svg {
+            transform: rotate(10deg) scale(1.1);
+            color: var(--white);
         }
 
-        .footer span {
+        .security-advisory {
+            margin-top: 45px;
+            padding: 20px;
+            background: rgba(245, 158, 11, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(245, 158, 11, 0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .security-advisory strong {
             color: var(--accent);
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.75rem;
+        }
+
+        .footer-tag {
+            margin-top: 35px;
+            font-size: 0.85rem;
+            color: #475569;
             font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .footer-tag span {
+            color: var(--primary);
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="profile-img">IB</div>
+    <img src="Logo.png" alt="Logo" class="logo-top">
+    
+    <div class="profile-container">
+        <div class="profile-img">IB</div>
+    </div>
+
     <h1 class="name">Imad Boulouiz</h1>
-    <p class="title">Engineering Student & Developer</p>
+    <p class="title">Engineer & Developer</p>
+    
     <p class="bio">
-        Passionate about software engineering, full-stack development, and automation. Currently pursuing my engineering degree at EMSI Rabat.
+        Mastering the art of software engineering. Specialized in building high-performance systems and intelligent automation.
     </p>
 
     <div class="links">
         <a href="mailto:boulouizimad@gmail.com" class="link-btn">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-            Email Me
+            Email Me Directly
         </a>
         <a href="https://github.com/Imad-BL" class="link-btn">
             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22v3.293c0 .319.192.694.805.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -170,12 +236,24 @@
         </a>
         <a href="https://www.linkedin.com/in/imad-boulouiz/" class="link-btn">
             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            LinkedIn
+            LinkedIn Pro
         </a>
     </div>
 
+    <div class="security-advisory">
+        <strong>⚠️ Security Advisory</strong>
+        Always verify QR sources before scanning. Scanning untrusted codes can compromise your device security. Stay safe.
+    </div>
+
+    <div class="footer-tag">
+        DIGITAL IDENTITY <span>2026</span>
+    </div>
+</div>
+
+</body>
+</html>
     <div class="footer">
-        Digital Business Card | Created By <span>BOULOUIZ IMAD</span>
+        Digital Business Card | Created BY <span>BOULOUIZ IMAD</span>
         <p style="font-size: 0.7rem; color: #64748b; margin-top: 20px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
             <strong style="color: var(--accent);">⚠️ Security Notice:</strong><br>
             Scanning QR codes from unknown sources can be harmful. Always verify the source and reliability of the code before scanning.
