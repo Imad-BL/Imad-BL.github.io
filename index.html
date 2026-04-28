@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOULOUIZ IMAD| Digital Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <title>BOULOUIZ IMAD | Digital Identity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
@@ -13,8 +12,8 @@
             --accent: #f59e0b;
             --white: #ffffff;
             --bg: #030712;
-            --glass: rgba(15, 23, 42, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(15, 23, 42, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.12);
         }
 
         * {
@@ -30,15 +29,23 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(99, 102, 241, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
         }
 
         body {
@@ -52,40 +59,72 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
         }
+
+        /* Decorative Background Blobs */
+        .blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0.2;
+            animation: blob 7s infinite alternate;
+        }
+
+        .blob-1 { top: -100px; left: -100px; background: var(--secondary); }
+        .blob-2 { bottom: -100px; right: -100px; background: var(--accent); animation-delay: 2s; }
 
         .card {
             background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             width: 100%;
-            max-width: 420px;
-            border-radius: 40px;
-            padding: 60px 40px;
+            max-width: 440px;
+            border-radius: 48px;
+            padding: 60px 45px;
             text-align: center;
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9),
+                        inset 0 0 20px rgba(255, 255, 255, 0.05);
             border: 1px solid var(--glass-border);
             position: relative;
-            animation: float 6s ease-in-out infinite;
-            transition: transform 0.3s ease;
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
+            overflow: hidden;
         }
 
-        .card:hover {
-            border-color: rgba(99, 102, 241, 0.3);
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-25deg);
+            animation: shine 6s infinite;
         }
 
         .logo-top {
-            width: 110px;
+            width: 120px;
             margin: 0 auto 35px;
-            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.4));
+            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.5));
             display: block;
+            transition: transform 0.3s ease;
         }
 
-        .profile-container {
+        .logo-top:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .profile-img-container {
             position: relative;
-            width: 140px;
-            height: 140px;
+            width: 150px;
+            height: 150px;
             margin: 0 auto 30px;
         }
 
@@ -97,167 +136,169 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            font-weight: 800;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            animation: pulse 4s infinite;
+            font-size: 4.5rem;
+            font-weight: 900;
+            border: 6px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             color: white;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
         .name {
-            font-size: 2.4rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #94a3b8);
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(to bottom right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
 
         .title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--secondary);
-            margin-bottom: 30px;
-            font-weight: 700;
+            margin-bottom: 35px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
         .bio {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: #cbd5e1;
-            margin-bottom: 40px;
-            line-height: 1.7;
+            margin-bottom: 45px;
+            line-height: 1.8;
             font-weight: 300;
+            padding: 0 10px;
         }
 
         .links {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 22px;
         }
 
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 18px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--white);
             text-decoration: none;
-            padding: 20px;
-            border-radius: 24px;
-            font-weight: 700;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 22px;
+            border-radius: 28px;
+            font-weight: 800;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            overflow: hidden;
         }
 
         .link-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.03) translateY(-3px);
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.04) translateY(-5px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 25px 50px -10px rgba(99, 102, 241, 0.4);
         }
 
         .link-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             color: var(--secondary);
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .link-btn:hover svg {
-            transform: rotate(10deg) scale(1.1);
+            transform: rotate(-15deg) scale(1.2);
             color: var(--white);
         }
 
-        .security-advisory {
-            margin-top: 45px;
-            padding: 20px;
-            background: rgba(245, 158, 11, 0.05);
-            border-radius: 20px;
-            border: 1px solid rgba(245, 158, 11, 0.1);
-            font-size: 0.85rem;
-            color: #94a3b8;
+        .security-section {
+            margin-top: 50px;
+            padding: 25px;
+            background: rgba(245, 158, 11, 0.08);
+            border-radius: 24px;
+            border: 1px solid rgba(245, 158, 11, 0.15);
             text-align: left;
-            line-height: 1.6;
         }
 
-        .security-advisory strong {
+        .security-section strong {
             color: var(--accent);
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 900;
         }
 
-        .footer-tag {
-            margin-top: 35px;
-            font-size: 0.85rem;
+        .security-section p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
             color: #475569;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .footer-tag span {
+        .footer span {
             color: var(--primary);
+        }
+
+        @media (max-width: 480px) {
+            .card { padding: 50px 30px; }
+            .name { font-size: 2.1rem; }
         }
     </style>
 </head>
 <body>
 
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
 <div class="card">
     <img src="Logo.png" alt="Logo" class="logo-top">
     
-    <div class="profile-container">
+    <div class="profile-img-container">
         <div class="profile-img">IB</div>
     </div>
 
-    <h1 class="name">Imad Boulouiz</h1>
-    <p class="title">Engineer & Developer</p>
+    <h1 class="name">BOULOUIZ IMAD</h1>
+    <p class="title">Engineer & Innovator</p>
     
     <p class="bio">
-        Mastering the art of software engineering. Specialized in building high-performance systems and intelligent automation.
+        Forging the future of software with high-performance engineering, full-stack excellence, and bespoke automation solutions.
     </p>
 
     <div class="links">
         <a href="mailto:boulouizimad@gmail.com" class="link-btn">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-            Email Me Directly
+            Direct Inquiry
         </a>
         <a href="https://github.com/Imad-BL" class="link-btn">
             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22v3.293c0 .319.192.694.805.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub Portfolio
+            Code Repositories
         </a>
         <a href="https://www.linkedin.com/in/imad-boulouiz/" class="link-btn">
             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            LinkedIn Pro
+            LinkedIn Network
         </a>
     </div>
 
-    <div class="security-advisory">
-        <strong>⚠️ Security Advisory</strong>
-        Always verify QR sources before scanning. Scanning untrusted codes can compromise your device security. Stay safe.
+    <div class="security-section">
+        <strong>⚠️ Protocol Safety</strong>
+        <p>Ensure the integrity of the QR source before scanning. Digital vigilance is key to security.</p>
     </div>
 
-    <div class="footer-tag">
-        DIGITAL IDENTITY <span>2026</span>
-    </div>
-</div>
-
-</body>
-</html>
     <div class="footer">
-        Digital Business Card | Created BY <span>BOULOUIZ IMAD</span>
-        <p style="font-size: 0.7rem; color: #64748b; margin-top: 20px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
-            <strong style="color: var(--accent);">⚠️ Security Notice:</strong><br>
-            Scanning QR codes from unknown sources can be harmful. Always verify the source and reliability of the code before scanning.
-        </p>
+        BOULOUIZ IMAD <span>2026</span>
     </div>
 </div>
 
