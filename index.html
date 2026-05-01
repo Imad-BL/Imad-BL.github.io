@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOULOUIZ IMAD | Digital Identity</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
@@ -25,71 +23,33 @@
         }
 
         @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        @keyframes shine {
-            0% {
-                left: -100%;
-            }
-
-            20% {
-                left: 100%;
-            }
-
-            100% {
-                left: 100%;
-            }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
             background: linear-gradient(-45deg, #030712, #1e1b4b, #1e293b, #030712);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             color: var(--white);
             min-height: 100vh;
-            display: block;
-            /* Fixed display for better scrolling */
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        .main-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 60px 20px;
-            position: relative;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
-        /* Decorative Background Blobs */
         .blob {
             position: fixed;
             width: 400px;
@@ -102,24 +62,15 @@
             pointer-events: none;
         }
 
-        .blob-1 {
-            top: -100px;
-            left: -100px;
-            background: var(--secondary);
-        }
-
-        .blob-2 {
-            bottom: -100px;
-            right: -100px;
-            background: var(--accent);
-        }
+        .blob-1 { top: -100px; left: -100px; background: var(--secondary); }
+        .blob-2 { bottom: -100px; right: -100px; background: var(--accent); }
 
         .card {
             background: var(--glass);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             width: 100%;
-            max-width: 420px;
+            max-width: 450px;
             border-radius: 40px;
             padding: 50px 35px;
             text-align: center;
@@ -129,23 +80,45 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        .card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
-            transform: skewX(-25deg);
-            animation: shine 8s infinite;
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
         }
 
         .logo-top {
             width: 100px;
             margin: 0 auto 30px;
-            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
             display: block;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
         }
 
         .profile-img-container {
@@ -259,79 +232,120 @@
             letter-spacing: 2px;
         }
 
+        /* RTL Support */
+        [dir="rtl"] .security-box { text-align: right; }
+        [dir="rtl"] .link-btn { flex-direction: row-reverse; }
+
         @media (max-width: 480px) {
-            .main-wrapper {
-                padding: 40px 15px;
-            }
-
-            .card {
-                padding: 40px 25px;
-                border-radius: 30px;
-            }
-
-            .name {
-                font-size: 1.8rem;
-            }
+            .card { padding: 40px 25px; }
+            .name { font-size: 1.8rem; }
+            .lang-btn { padding: 6px 12px; font-size: 0.8rem; }
         }
     </style>
 </head>
-
 <body>
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
 
-    <div class="main-wrapper">
-        <div class="card">
-            <img src="Logo.png" alt="Logo" class="logo-top">
-
-            <div class="profile-img-container">
-                <div class="profile-img">IB</div>
-            </div>
-
-            <h1 class="name">Imad Boulouiz</h1>
-            <p class="title">Engineer & Developer</p>
-
-            <p class="bio">
-                Specialized in software engineering, full-stack development, and system automation.
-            </p>
-
-            <div class="links">
-                <a href="mailto:boulouizimad@gmail.com" class="link-btn">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                        </path>
-                    </svg>
-                    Email Inquiry
-                </a>
-                <a href="https://github.com/Imad-BL" class="link-btn">
-                    <svg fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22v3.293c0 .319.192.694.805.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                    </svg>
-                    GitHub Portfolio
-                </a>
-                <a href="https://www.linkedin.com/in/imad-boulouiz/" class="link-btn">
-                    <svg fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                    LinkedIn Pro
-                </a>
-            </div>
-
-            <div class="security-box">
-                <strong>⚠️ Security Advisory</strong>
-                <p>Verify QR sources before scanning. Untrusted codes can compromise your device.</p>
-            </div>
-
-            <div class="footer">
-                IMAD-BL | <span>2026</span>
-            </div>
-        </div>
+<div class="card" id="mainCard">
+    <div class="lang-switcher">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">AR</button>
     </div>
 
-</body>
+    <img src="Logo.png" alt="Logo" class="logo-top">
+    
+    <div class="profile-img-container">
+        <div class="profile-img">IB</div>
+    </div>
 
+    <h1 class="name">Imad Boulouiz</h1>
+    <p class="title" id="title">Engineer & Developer</p>
+    
+    <p class="bio" id="bio">
+        Specialized in software engineering, full-stack development, and system automation.
+    </p>
+
+    <div class="links">
+        <a href="mailto:boulouizimad@gmail.com" class="link-btn" id="email-btn">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span id="txt-email">Email Inquiry</span>
+        </a>
+        <a href="https://github.com/Imad-BL" class="link-btn" id="github-btn">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22v3.293c0 .319.192.694.805.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span id="txt-github">GitHub Portfolio</span>
+        </a>
+        <a href="https://www.linkedin.com/in/imad-boulouiz/" class="link-btn" id="linkedin-btn">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span id="txt-linkedin">LinkedIn Pro</span>
+        </a>
+    </div>
+
+    <div class="security-box">
+        <strong id="txt-sec-title">⚠️ Security Advisory</strong>
+        <p id="txt-sec-body">Verify QR sources before scanning. Untrusted codes can compromise your device.</p>
+    </div>
+
+    <div class="footer">
+        IMAD-BL | <span>2026</span>
+    </div>
+</div>
+
+<script>
+    const translations = {
+        en: {
+            title: "Engineer & Developer",
+            bio: "Specialized in software engineering, full-stack development, and system automation.",
+            email: "Email Inquiry",
+            github: "GitHub Portfolio",
+            linkedin: "LinkedIn Pro",
+            secTitle: "⚠️ Security Advisory",
+            secBody: "Verify QR sources before scanning. Untrusted codes can compromise your device.",
+            dir: "ltr"
+        },
+        fr: {
+            title: "Ingénieur & Développeur",
+            bio: "Spécialisé en génie logiciel, développement full-stack et automatisation de systèmes.",
+            email: "Contact par Email",
+            github: "Portfolio GitHub",
+            linkedin: "Profil LinkedIn",
+            secTitle: "⚠️ Avis de Sécurité",
+            secBody: "Vérifiez les sources QR avant de scanner. Les codes non fiables peuvent compromettre votre appareil.",
+            dir: "ltr"
+        },
+        ar: {
+            title: "مهندس ومطور برمجيات",
+            bio: "متخصص في هندسة البرمجيات، تطوير المواقع الكاملة، وأتمتة الأنظمة.",
+            email: "تواصل عبر البريد",
+            github: "معرض أعمال GitHub",
+            linkedin: "الملف الشخصي LinkedIn",
+            secTitle: "⚠️ تنبيه أمني",
+            secBody: "تحقق من مصادر رموز QR قبل المسح. الأكواد غير الموثوقة قد تضر بجهازك.",
+            dir: "rtl"
+        }
+    };
+
+    function setLang(lang) {
+        const t = translations[lang];
+        document.getElementById('title').textContent = t.title;
+        document.getElementById('bio').textContent = t.bio;
+        document.getElementById('txt-email').textContent = t.email;
+        document.getElementById('txt-github').textContent = t.github;
+        document.getElementById('txt-linkedin').textContent = t.linkedin;
+        document.getElementById('txt-sec-title').textContent = t.secTitle;
+        document.getElementById('txt-sec-body').textContent = t.secBody;
+        
+        document.getElementById('mainCard').dir = t.dir;
+        
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById('btn-' + lang).classList.add('active');
+    }
+</script>
+
+</body>
 </html>
